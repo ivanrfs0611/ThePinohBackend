@@ -1,2 +1,4 @@
 config/*
-node_modules/
+node_module
+images/*
+.DS_Store
