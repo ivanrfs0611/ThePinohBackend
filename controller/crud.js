@@ -40,3 +40,23 @@ exports.insertMenu = async (req, res) => {
       });
     });
 };
+
+exports.getMenu = async (req, res) => {
+  let result = crudModel.getMenu();
+
+  result
+    .then(function (result) {
+      res.json({
+        status: 200,
+        success: true,
+        return: result,
+      });
+    })
+    .catch(function (err) {
+      res.json({
+        status: 500,
+        success: false,
+        message: err,
+      });
+    });
+};

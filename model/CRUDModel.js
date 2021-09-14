@@ -10,3 +10,14 @@ exports.insertMenu = (data) => {
     });
   });
 };
+
+exports.getMenu = () => {
+  return new Promise(function (resolve, reject) {
+    var sql = "select * from Menu";
+    pool.query(sql, (err, result) => {
+      if (err) reject(err);
+
+      resolve(result);
+    });
+  });
+};
