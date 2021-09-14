@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Aug 27, 2021 at 12:18 PM
+-- Generation Time: Sep 14, 2021 at 06:55 AM
 -- Server version: 5.7.32
 -- PHP Version: 7.4.16
 
@@ -82,13 +82,19 @@ CREATE TABLE `CategoryMenu` (
 
 CREATE TABLE `Menu` (
   `menuId` int(11) NOT NULL,
-  `userId` int(11) NOT NULL,
   `menuName` varchar(50) NOT NULL,
   `menuDescription` varchar(200) NOT NULL,
   `quantity` int(11) NOT NULL,
   `price` int(11) NOT NULL,
-  `photo` blob NOT NULL
+  `photo` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `Menu`
+--
+
+INSERT INTO `Menu` (`menuId`, `menuName`, `menuDescription`, `quantity`, `price`, `photo`) VALUES
+(6, 'Test Menu', 'Ini adalah test menu', 1, 10000, 'sktwiehxktjq0e4s.jpg');
 
 -- --------------------------------------------------------
 
@@ -136,6 +142,13 @@ CREATE TABLE `Register` (
   `passwordHash` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `Register`
+--
+
+INSERT INTO `Register` (`registerId`, `email`, `username`, `passwordHash`) VALUES
+(1, 'ivan@mail.com', 'ivanrfs', '$2b$10$3eKMcGrUcKAA3waQPE4zGeTx.2yJ2xWyPR7MjBlZPjD0RP0sxiL4.');
+
 -- --------------------------------------------------------
 
 --
@@ -167,6 +180,13 @@ CREATE TABLE `User` (
   `address` varchar(200) NOT NULL,
   `loginType` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `User`
+--
+
+INSERT INTO `User` (`userId`, `registerId`, `username`, `passwordHash`, `firstName`, `lastName`, `phoneNumber`, `address`, `loginType`) VALUES
+(1, 1, 'ivanrfs', '$2b$10$3eKMcGrUcKAA3waQPE4zGeTx.2yJ2xWyPR7MjBlZPjD0RP0sxiL4.', 'Ivan', '', '081319006943', 'Jl. Pisang 1000', 2);
 
 --
 -- Indexes for dumped tables
@@ -204,8 +224,7 @@ ALTER TABLE `CategoryMenu`
 -- Indexes for table `Menu`
 --
 ALTER TABLE `Menu`
-  ADD PRIMARY KEY (`menuId`),
-  ADD KEY `Menu_fk0` (`userId`);
+  ADD PRIMARY KEY (`menuId`);
 
 --
 -- Indexes for table `Order`
@@ -269,7 +288,7 @@ ALTER TABLE `CategoryMenu`
 -- AUTO_INCREMENT for table `Menu`
 --
 ALTER TABLE `Menu`
-  MODIFY `menuId` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `menuId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `Order`
@@ -287,7 +306,7 @@ ALTER TABLE `OrderItem`
 -- AUTO_INCREMENT for table `Register`
 --
 ALTER TABLE `Register`
-  MODIFY `registerId` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `registerId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `Transaction`
@@ -299,7 +318,7 @@ ALTER TABLE `Transaction`
 -- AUTO_INCREMENT for table `User`
 --
 ALTER TABLE `User`
-  MODIFY `userId` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `userId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
@@ -329,12 +348,6 @@ ALTER TABLE `Category`
 --
 ALTER TABLE `CategoryMenu`
   ADD CONSTRAINT `CategoryMenu_fk0` FOREIGN KEY (`menuId`) REFERENCES `Menu` (`menuId`);
-
---
--- Constraints for table `Menu`
---
-ALTER TABLE `Menu`
-  ADD CONSTRAINT `Menu_fk0` FOREIGN KEY (`userId`) REFERENCES `User` (`userId`);
 
 --
 -- Constraints for table `Order`
