@@ -26,7 +26,7 @@ exports.login = async (req, res) => {
         });
       } else {
         //unsuccessful login
-        console.log(result);
+        // console.log(result);
         res.json({
           code: 200,
           success: true,
